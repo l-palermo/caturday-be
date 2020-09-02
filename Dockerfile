@@ -1,5 +1,6 @@
 FROM node:14-buster
-WORKDIR /src
+WORKDIR /caturday-be
+COPY package.json package-lock.json ./
+RUN npm install --production
 COPY . .
-RUN yarn install
-CMD ["yarn", "start"]
+CMD ["npm", "start"]

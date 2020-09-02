@@ -1,11 +1,19 @@
 {
   "name": "caturday-be",
   "version": "1.0.0",
-  "description": "",
+  "description": "caturday backend app",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/l-palermo/caturday-be"
+  },
   "scripts": {
+    "start": "nodemon src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Luigi <l-palermo@hotmail.it>",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "nodemon": "2.0.4"
+  }
 }
