@@ -1,18 +1,14 @@
-const express = require("express");
-const server = express();
-const cors = require("cors");
-const { homeGifs, searchGifs } = require("./modules/middlewares/responses");
+require('dotenv').config();
+const server = require('express')();
+const cors = require('cors');
 
-// find other way to allows cors during dev
-if (process.env.MODE === "dev")
-  server.use(cors({ origin: "*" }));
+const api = require('./modules/routers/api/api');
+const authVerification = require('./modules/routers/auth-verification/auth-verification');
+const { isDevEnv } = require('./env');
 
-// to be explored
-// server.use(express.json())
-// server.use(express.urlencoded({ extended: true }))
+isDevEnv() && server.use(cors({ origin: '*' }));
 
-server.get("/api/", homeGifs);
-
-server.get("/api/search", searchGifs);
+server.use('/auth', authVerification);
+server.use('/api', api);
 
 module.exports = server;

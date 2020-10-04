@@ -1,12 +1,12 @@
-version: "3.7"
+version: '3.7'
 
-services: 
-    caturday-be:
-        image: node:14-buster
-        working_dir: /caturday-be
-        command: sh -c "npm install && npm run start"
-        ports:
-            - 4000:4000
-        # /caturday-be in volumes is necessary because it looks for the package.json on the /caturday
-        volumes: 
-            - ./:/caturday-be
+services:
+  caturday-be:
+    image: node:14-buster
+    working_dir: /caturday-be
+    command: sh -c "npm install && npm run prod:start"
+    ports:
+      - 4000:4000
+    # /caturday-be in volumes is necessary because it looks for the package.json on the /caturday
+    volumes:
+      - ./:/caturday-be

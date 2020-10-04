@@ -1,5 +1,5 @@
-const { buildGfyHomeUrl, buildGfySearchUrl } = require("./api-urls/api-urls");
-const { get } = require("axios").default;
+const { buildGfyHomeUrl, buildGfySearchUrl } = require('./api-urls/api-urls');
+const { get } = require('axios').default;
 
 module.exports = {
   getGifyHome: async function getGifyHome(tagName, count) {
