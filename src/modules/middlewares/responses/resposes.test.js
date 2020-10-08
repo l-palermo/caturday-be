@@ -51,7 +51,7 @@ describe('Responses', () => {
       const response = await searchGifs(req, res);
 
       expect(response.body).toEqual(new TypeError('The passed paramenters are invalid'));
-      expect(response.status).toEqual(401);
+      expect(response.status).toEqual(406);
     });
     it('should respond with the correct data when passed the correct params', async () => {
       getGifySearch.mockImplementation(() => []);

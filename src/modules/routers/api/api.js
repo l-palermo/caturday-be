@@ -1,9 +1,9 @@
 const router = require('express').Router();
 
 const { homeGifs, searchGifs } = require('../../middlewares/responses/responses');
-const { jwtCaturdayVerify } = require('../../middlewares/auth/jwt-caturday/jwt-caturday');
+const { auth } = require('../../middlewares/auth/auth');
 
-router.use(jwtCaturdayVerify);
+router.use(auth);
 
 router.get('/', homeGifs);
 router.get('/search', searchGifs);

@@ -1,0 +1,126 @@
+:root {
+    --collection-cell-width: 16.5rem;
+}
+
+.collections-page-module__text____13AYG {
+    color: white;
+    font-weight: 400;
+    padding: var(--spacing-xs);
+    margin: 0;
+}
+
+.collections-page-module__layout____w0GRw {
+    margin-top: var(--spacing-l);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(var(--collection-cell-width), 100%));
+    grid-gap: 1rem;
+    overflow: hidden;
+    padding: var(--spacing-xs);
+}
+
+@media (min-width: 480px) {
+
+.collections-page-module__layout____w0GRw {
+        grid-template-columns: repeat(
+            auto-fit,
+            minmax(var(--collection-cell-width), var(--collection-cell-width))
+        )
+}
+    }
+
+.collections-page-module__textSpacing____1MRZj {
+    padding-left: var(--spacing-xs);
+}
+
+.collections-header-module__collectionsHeader____XWx-a {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--spacing-l);
+    padding-left: var(--spacing-xs);
+}
+
+    @media (min-width: 480px) {.collections-header-module__collectionsHeader____XWx-a {
+        margin-bottom: var(--spacing-xl)
+}
+    }
+
+.collections-header-module__textSpacing____3u3Wa {
+    padding-left: var(--spacing-xs);
+}
+
+:root {
+    --card-height: 18rem;
+    --card-border-radius: 1rem;
+}
+
+.collection-card-module__link____1dTZA {
+    text-decoration: none;
+}
+
+.collection-card-module__headerContent____3H2Mc {
+    position: absolute;
+    padding: var(--spacing-m);
+    z-index: 1;
+}
+
+.collection-card-module__name____XCkpD {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    font-size: 3rem;
+    background-color: white;
+    color: black;
+    mix-blend-mode: screen;
+    border-radius: var(--card-border-radius);
+    font-weight: bolder;
+    height: var(--card-height);
+    text-align: center;
+}
+
+.collection-card-module__name____XCkpD:hover {
+        mix-blend-mode: normal;
+    }
+
+.confirmation-module__confirmationContainer____vQLQG {
+    padding: 0.3rem;
+    background-color: rgba(0, 0, 0, 0.575);
+    border-radius: 1rem;
+    display: flex;
+}
+
+.confirmation-module__confirmationButton____HIymT {
+    border-radius: 50%;
+    border: none;
+    padding: 0.2rem;
+    display: flex;
+    height: inherit;
+    align-items: center;
+    margin-right: 0.5rem;
+    background-color: white;
+}
+
+.confirmation-module__confirmationButton____HIymT:last-child {
+        margin-right: 0;
+    }
+
+.confirmation-module__confirmationButton____HIymT:hover {
+        background-color: lightgrey;
+    }
+
+.confirmation-module__confirm____32X2j {
+    fill: green;
+}
+
+.confirmation-module__confirm____32X2j:hover {
+        fill: white;
+    }
+
+.confirmation-module__deny____1rp3K {
+    fill: darkred;
+}
+
+.confirmation-module__deny____1rp3K:hover {
+        fill: white;
+    }
+

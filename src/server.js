@@ -1,14 +1,16 @@
 require('dotenv').config();
-const server = require('express')();
+const express = require('express');
+const path = require('path');
 const cors = require('cors');
 
 const api = require('./modules/routers/api/api');
-const authVerification = require('./modules/routers/auth-verification/auth-verification');
-const { isDevEnv } = require('./checkEnv');
 
-isDevEnv() && server.use(cors({ origin: '*' }));
+const server = express();
 
-server.use('/auth', authVerification);
+server.use(cors({origin: '*'}));
+
+server.use(express.static(path.join(__dirname, 'dist')));
+
 server.use('/api', api);
 
 module.exports = server;

@@ -10,7 +10,8 @@
     "ecmaVersion": 12
   },
   "globals": {
-    "process": false
+    "process": false,
+    "__dirname": false
   },
   "plugins": ["prettier"],
   "rules": {
@@ -18,5 +19,6 @@
     "linebreak-style": ["error", "unix"],
     "quotes": ["error", "single"],
     "semi": ["error", "always"]
-  }
+  },
+  "ignorePatterns": ["**/dist/**"]
 }
