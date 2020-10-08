@@ -2,7 +2,7 @@ const { get } = require('axios').default;
 const jwt = require('jsonwebtoken');
 const jwkToPem = require('jwk-to-pem');
 
-const { cognitoPublicKeysVerify }  = require('./jwt-aws');
+const { auth }  = require('./auth');
 
 jest.mock('axios');
 jest.mock('jsonwebtoken');
@@ -25,7 +25,7 @@ describe('JWT AWS', () => {
     const res = {};
     const next = jest.fn();
 
-    await cognitoPublicKeysVerify(req, res, next);
+    await auth(req, res, next);
 
     expect(jwt.decode).toHaveBeenCalled();
     expect(get).toHaveBeenCalled();
@@ -45,7 +45,7 @@ describe('JWT AWS', () => {
     const res = { status: (stValue) => ({ json: (payload) =>  ({ status: stValue, json: payload})})};
     const next = {};
 
-    return expect(cognitoPublicKeysVerify(req, res, next)).resolves.toEqual(
+    return expect(auth(req, res, next)).resolves.toEqual(
       {'json': {error: new TypeError('Error occured')}, 'status': 401}
     );
 
@@ -58,7 +58,7 @@ describe('JWT AWS', () => {
     const res = { status: (stValue) => ({ json: (payload) =>  ({ status: stValue, json: payload})})};
     const next = {};
 
-    return expect(cognitoPublicKeysVerify(req, res, next)).resolves.toEqual(
+    return expect(auth(req, res, next)).resolves.toEqual(
       {'json': {error: new TypeError('Error occured')}, 'status': 401}
     );
   });

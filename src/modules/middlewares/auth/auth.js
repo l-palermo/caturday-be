@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const jwkToPem = require('jwk-to-pem');
 
 module.exports = {
-  cognitoPublicKeysVerify: async (req, res, next) => {
+  auth: async (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
     try {
       const { header } = jwt.decode(token, { complete: true });
