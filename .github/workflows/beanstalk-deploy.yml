@@ -24,4 +24,5 @@ jobs:
         environment_name: CaturdayBe-env
         version_label: caturdayBe
         region: eu-west-2
+        use_existing_version_if_available: true
         deployment_package: caturdayBe.zip
