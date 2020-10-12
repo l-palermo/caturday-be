@@ -1,4 +1,10 @@
 node_modules
 coverage
 .env
-test.env
+.github/workflows/beanstalk-deploy.yml
+
+# Elastic Beanstalk Files
+.elasticbeanstalk
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

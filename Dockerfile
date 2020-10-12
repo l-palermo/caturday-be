@@ -1,6 +1,6 @@
 FROM node:14-buster
 WORKDIR /caturday-be
 COPY package.json package-lock.json ./
-RUN npm install
+RUN npm install --only=prod
 COPY . .
-CMD ["npm", "prod:start"]
+CMD ["node", "src/index.js"]

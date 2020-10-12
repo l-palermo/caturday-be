@@ -1,34 +1,33 @@
 {
   "AWSEBDockerrunVersion": 2,
+  "volumes": [
+    {
+      "name": "caturday-be-volume",
+      "host": {
+        "sourcePath": "/var/app/current/"
+      }
+    }
+  ],
   "containerDefinitions": [
     {
-      "command": ["sh", "-c", "npm install && npm run prod:start"],
-      "essential": true,
+      "name": "caturday-be",
       "image": "node:14-buster",
-      "memory": 200,
+      "essential": true,
+      "memory": 128,
+      "command": ["node", "/caturday-be/src/index.js"],
+      "workingDirectory": "/caturday-be",
       "mountPoints": [
         {
           "containerPath": "/caturday-be",
-          "sourceVolume": "_"
+          "sourceVolume": "caturday-be-volume"
         }
       ],
-      "name": "caturday-be",
       "portMappings": [
         {
           "containerPort": 4000,
           "hostPort": 4000
         }
-      ],
-      "workingDirectory": "/caturday-be"
-    }
-  ],
-  "family": "",
-  "volumes": [
-    {
-      "host": {
-        "sourcePath": "./"
-      },
-      "name": "_"
+      ]
     }
   ]
 }
