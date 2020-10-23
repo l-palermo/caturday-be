@@ -17,7 +17,7 @@ describe('Responses', () => {
 
       const response = await homeGifs(req, res);
 
-      expect(response.json).toEqual(new TypeError('The passed paramenters are invalid'));
+      expect(response.json).toEqual({error: new TypeError('The passed paramenters are invalid')});
     });
     it('should respond with the correct data when passed the correct params', async () => {
       getGifyHome.mockImplementation(() => []);
@@ -50,7 +50,7 @@ describe('Responses', () => {
 
       const response = await searchGifs(req, res);
 
-      expect(response.body).toEqual(new TypeError('The passed paramenters are invalid'));
+      expect(response.body).toEqual({ error: new TypeError('The passed paramenters are invalid')});
       expect(response.status).toEqual(406);
     });
     it('should respond with the correct data when passed the correct params', async () => {

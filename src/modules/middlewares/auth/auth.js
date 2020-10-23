@@ -4,8 +4,8 @@ const jwkToPem = require('jwk-to-pem');
 
 module.exports = {
   auth: async (req, res, next) => {
-    const token = req.headers.authorization.split(' ')[1];
     try {
+      const token = req.headers.authorization.split(' ')[1];
       const { header } = jwt.decode(token, { complete: true });
       const { data } = await get(process.env.JWT_ISSUER);
 
@@ -20,7 +20,7 @@ module.exports = {
       jwt.verify(token, pem);
       next();
     } catch (err) {
-      return res.status(401).json({ error: err });
+      return res.status(403).json({message: 'There might be a problem with the authentication header', error: err.stack});
     }
   }
 };
