@@ -15,7 +15,7 @@ module.exports = {
         return res.status(503).json(err);
       }
     }
-    return res.status(406).json(new TypeError('The passed paramenters are invalid'));
+    return res.status(406).json({error: new TypeError('The passed paramenters are invalid')});
   },
   searchGifs: async function searchgGifs(req, res) {
     const { searchText, count } = req.query;
@@ -29,6 +29,6 @@ module.exports = {
         return res.status(503).json(err);
       }
     }
-    return res.status(406).json(new TypeError('The passed paramenters are invalid'));
+    return res.status(406).json({ error: new TypeError('The passed paramenters are invalid')});
   },
 };

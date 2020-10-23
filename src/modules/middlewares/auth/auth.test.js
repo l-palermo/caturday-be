@@ -33,33 +33,20 @@ describe('JWT AWS', () => {
     expect(jwt.verify).toHaveBeenCalled();
     expect(next).toHaveBeenCalled();
   });
-  it('should respond with an error if the key is invalid', () => {
+  it('should respond with an error if the key is invalid', async () => {
     jwt.decode.mockImplementation(() => ({ header: { kid: 'key' }}));
     jwt.verify.mockImplementation(() => {});
-    jwkToPem.mockImplementation(() => {throw new TypeError('Error occured');});
+    jwkToPem.mockImplementation(() => {throw { stack: 'test'};});
     get.mockImplementation(() => (Promise.resolve({
       data: { keys: [{kid: 'different key'}]}
     })));
 
-    const req = { headers: { authorization: 'a test'}};
+    const req = { headers: { authorization: 'a test'}, id: 'test'};
     const res = { status: (stValue) => ({ json: (payload) =>  ({ status: stValue, json: payload})})};
     const next = {};
 
-    return expect(auth(req, res, next)).resolves.toEqual(
-      {'json': {error: new TypeError('Error occured')}, 'status': 401}
-    );
-
-  });
-  it('should respond with an error if an error is trown by an external module', () => {
-    jwt.decode.mockImplementation(() => ({ header: { kid: 'test' }}));
-    get.mockImplementation(() => (Promise.reject(new TypeError('Error occured'))));
-
-    const req = { headers: { authorization: 'a test'}};
-    const res = { status: (stValue) => ({ json: (payload) =>  ({ status: stValue, json: payload})})};
-    const next = {};
-
-    return expect(auth(req, res, next)).resolves.toEqual(
-      {'json': {error: new TypeError('Error occured')}, 'status': 401}
+    return expect(auth(req, res, next)).resolves.toEqual( 
+      {'json': {message: 'There might be a problem with the authentication header', error: 'test'}, 'status': 403}
     );
   });
 });

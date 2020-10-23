@@ -1,0 +1,37 @@
+name: Deploy master
+on:
+  push:
+    branches:
+    - master
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Generate build number
+      id: buildnumber
+      uses: einaregilsson/build-number@v2 
+      with:
+        token: ${{secrets.github_token}}  
+    
+    - name: Checkout source code
+      uses: actions/checkout@v1
+
+    - name: Install dependecies
+      run: npm install --only=prod
+      run: npm shrinkwrap
+
+    - name: Generate deployment package
+      run: zip -r caturdayBe.zip . -i 'package.json' 'node_modules/*' 'src/*' -x '*.test.*'
+      
+    - name: Deploy to EB
+      uses: einaregilsson/beanstalk-deploy@v13
+      with:
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        application_name: caturday-be
+        environment_name: CaturdayBe-env
+        version_label: caturdayBe-${{ steps.buildnumber.outputs.build_number }}
+        region: eu-west-2
+        deployment_package: caturdayBe.zip
