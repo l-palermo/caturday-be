@@ -20,7 +20,6 @@ jobs:
 
     - name: Install dependecies
       run: npm install --only=prod
-      run: npm shrinkwrap
 
     - name: Generate deployment package
       run: zip -r caturdayBe.zip . -i 'package.json' 'node_modules/*' 'src/*' -x '*.test.*'
