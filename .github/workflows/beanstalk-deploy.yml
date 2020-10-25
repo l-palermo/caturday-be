@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - name: Generate build number
+    - name: Generate unique version lable
       id: buildnumber
       uses: einaregilsson/build-number@v2 
       with:
@@ -22,7 +22,7 @@ jobs:
       run: npm install --only=prod
 
     - name: Generate deployment package
-      run: zip -r caturdayBe.zip . -i 'package.json' 'node_modules/*' 'src/*' -x '*.test.*'
+      run: zip -r caturdayBe.zip . -i 'package.json' 'node_modules/*' 'src/*' '.ebextensions/*' -x '*.test.*'
       
     - name: Deploy to EB
       uses: einaregilsson/beanstalk-deploy@v13
@@ -30,7 +30,10 @@ jobs:
         aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         application_name: caturday-be
-        environment_name: CaturdayBe-env-1
+        environment_name: CaturdayBe-env
         version_label: caturdayBe-${{ steps.buildnumber.outputs.build_number }}
         region: eu-west-2
         deployment_package: caturdayBe.zip
+    
+    - name: Delete modules and zip
+      run: rm -r node_modules caturdayBe.zip
