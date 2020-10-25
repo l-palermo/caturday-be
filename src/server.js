@@ -16,7 +16,7 @@ server.use(morgan('dev'));
 server.use(compress());
 server.use(helmet());
 
-server.use(express.static(path.join(__dirname, 'dist')));
+server.use('/', express.static(path.join(__dirname, 'dist')));
 
 server.use('/api', api);
 
